@@ -1,80 +1,46 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
-//import Comment from '../Comment/Comment';
+import Comment from '../Comment/Comment';
 
-const useStyles = makeStyles({
-    root: {
-        minWidth: 275,
-    },
-    bullet: {
-        display: 'inline-block',
-        margin: '0 2px',
-        transform: 'scale(0.8)',
-    },
-    title: {
-        fontSize: 14,
-    },
-    pos: {
-        marginBottom: 12,
-    },
-});
 const PostDetail = (props) => {
-    const { postId } = useParams();
-    const [post, setPost] = useState({});
-    
+
+    const [detail, setDetail] = useState([]);
+    const { id } = useParams();
     useEffect(() =>{
-        const url = `https://jsonplaceholder.typicode.com/posts/${postId}`
+        const url = `https://jsonplaceholder.typicode.com/posts/${id}`
         fetch(url)
             .then(res => res.json())
-            .then(data => setPost(data))
+            .then(data => setDetail(data))
     }, [])
 
-    // const [comment, setComment] = useState([]);
-    // useEffect(() => {
-    //     fetch(`https://jsonplaceholder.typicode.com/comments?postId=${postId}`)
-    //         .then(res => res.json())
-    //         .then(data => setComment())
-    // }, [])
+    const [comment, setComment] = useState([]);
+    useEffect(() => {
+        const url = `https://jsonplaceholder.typicode.com/comments?postId=${id}`
+        fetch(url)
+            .then(res => res.json())
+            .then(data => setComment(data))
+    }, [])
 
-    const classes = useStyles();
-    const bull = <span className={classes.bullet}>•</span>;
-
-    const { title, Name, body } = props.detail;
+        const pstStyles={
+            border: '1px solid green',
+            margin: '10px',
+            padding: '15px'
+        }
 
 
     return (
-        <div>
-            <Card className={classes.root} variant="outlined">
-                <CardContent>
-                    <Typography className={classes.title} color="textSecondary" gutterBottom>
-                        ID: {bull} {}
-                    </Typography>
-                    <Typography variant="h5" component="h2">
-                        Title: {title}
-                    </Typography>
-                    <Typography className={classes.pos} color="textSecondary">
-                        Name: {Name}
-                    </Typography>
-                    <Typography variant="body2" component="p">
-                        Body: {body}
-                        <br />
-                        {'"a benevolent smile"'}
-                    </Typography>
-                </CardContent>
-                <CardActions>
-                    <Button size="small">Comments</Button>
-                </CardActions>
-            </Card>
-            {
-                // comment.map(comments => <Comment com={comments}></Comment> )
-            }
+    <div>
+        <div style={pstStyles}>
+            <h1>This is post details: {id}</h1>
+            <h2>title:  {detail.title}</h2>
+            <h2>Body:  {detail.body}</h2>         
         </div>
+
+            {
+                comment.map(comments => <Comment comments={comments}></Comment> )
+            }
+
+    </div>
     );
 };
 

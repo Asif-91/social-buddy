@@ -5,7 +5,7 @@ import Post from '../Post/Post';
 const Home = () => {
     // const classes = useStyles();
     
-    const [posts, setPosts] = useState([0, 10]);
+    const [posts, setPosts] = useState([]);
     useEffect(() => {
         fetch('https://jsonplaceholder.typicode.com/posts')
             .then(res => res.json())
@@ -18,7 +18,7 @@ const Home = () => {
             <h1>Posts: {posts.length}</h1>
             
             {
-                posts.map(posts => <Post post={posts}></Post>)
+                posts.map(posts => <Post posts={posts}></Post>)
             }
 
         </div>

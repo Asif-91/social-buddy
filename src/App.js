@@ -8,8 +8,8 @@ import {
 } from "react-router-dom";
 import Home from './components/Home/Home';
 import NoMatch from './components/NoMatch/NoMatch';
-import Post from './components/Post/Post';
 import PostDetail from './components/PostDetail/PostDetail';
+// import Post from './components/Post/Post';
 
 function App() {
   return (
@@ -18,9 +18,9 @@ function App() {
         <Route path="/home">
           <Home></Home>
         </Route>
-        <Route path="/posts">
+        {/* <Route path="/posts">
           <Post></Post>
-        </Route>
+        </Route> */}
         <Route path="/posts/:id">
           <PostDetail></PostDetail>
         </Route>

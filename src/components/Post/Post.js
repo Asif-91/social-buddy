@@ -20,8 +20,11 @@ const useStyles = makeStyles({
 });
 
 const Post = (props) => {
+    const {title, id } = props.posts;
+
     const classes = useStyles();
-    const {title, id } = props.post;
+
+    
 
     return (
         <div>
@@ -43,11 +46,11 @@ const Post = (props) => {
                 </CardActionArea>
                 <CardActions>
 
-                <Link to={`/posts/${id}`}>
+                
                 <Button variant="contained" color="primary" disableElevation>
-                        See More About {id}
+                <Link to={`/posts/${id}`}> See More About {id}</Link>
                     </Button>
-                </Link>
+                
 
                     
 
